@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+    <link href="/media/bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+	{% include "navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  	<div class="page-header">
+    	</br><h3>View Stock Levels</br><small>select to view levels based on stock item or facility</small> </h3></br> 
+    </div>
+  </div>
+<div class="container">
+{% include "message_board.html" %}
+      <div class="panel panel-default">
+			        <div class="panel-body">
+			        <a href="/stock/stock_level/stock/" class="nounderline">
+			          <div >
+			            <h4>
+			            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;&nbsp;Stock levels per stock item
+			            </h4>
+			          </div>
+			        </a>          
+                <td class="text-center">
+			        <a href="/stock/stock_level/facility/" class="nounderline">			        
+			          <div>
+			            <h4>
+			              <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;&nbsp;Stock levels per facility
+			            </h4>
+			          </div>
+			          </a>
+			        </div>
+    </div>
+</div>
+{% endblock %}

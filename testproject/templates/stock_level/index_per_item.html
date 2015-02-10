@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+    <link href="/media/bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+	{% include "navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  	<div class="page-header">
+    	</br><h3>View Stock Levels</br><small>on a per stock item basis</small> </h3></br> 
+    </div>
+  </div>
+<div class="container">
+
+{% if message %}
+  <div class="panel panel-success">
+     <div class="panel-heading">
+
+     	<p class="text-center"> <strong>{{ message }}</strong></p>
+  
+      </div>
+  </div>
+{% endif %}
+
+      <div class="panel panel-default">
+      {% include "message_board.html" %}
+		    <div class="panel-heading">
+		        <h1 class="panel-title">Stock level overview</h1>
+		    </div>
+            <table class="table table-condensed table-hover table_small table_row_border_white table-striped">
+            <thead>
+                <tr>
+                    <th>Stock Item Name</th>
+                    <th># of Facilities Stocking</th>
+                    <th>Overall Total in Stock</th>
+                    <th>Ave. per Facility</th>
+                    
+                </tr>
+            </thead>
+            <tbody data-link="row" class="rowlink">
+            {%if stock_levels %}
+                {% for key, stock_item in stock_levels.items%}
+                <tr >
+                    <td>{{stock_item.item}}</td>
+                    <td class="text-center"><a href="/stock/stock_level/facility_stock/{{key.id}}/">{{stock_item.facility_count}}</a></td>
+                    <td class="text-center">{{stock_item.total}}</td>
+                    <td class="text-center">{{stock_item.average}}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <tr class="alert alert-danger text-center" >
+            <td colspan="5">No stock allocated.</td>
+            </tr>{% endif%}                
+            </tbody>
+            </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+    <link href="/media/bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+	{% include "navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  	<div class="page-header">
+    	</br><h3>Update Stock</br><small>update {{facility_stock.stock_item.name}} levels for {{facility_stock.facility.name}}</small> </h3></br> 
+    </div>
+  </div>
+
+<div class="container">
+  {% if message %}
+  <div class="panel panel-primary">
+     <div class="panel-heading">
+
+     	<p class="text-center"> <strong>{{ message }}</strong></p>
+  
+      </div>
+  </div>
+{% endif %}
+        <div class="toppad" >
+   {% include "message_board.html" %}
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{facility_stock.facility.name}}</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center">
+                <object data="/media/img/{{facility_stock.stock_item.name}}.jpg" type="image/png" class="img-circle"/>
+  					 <img src="/media/img/def.jpg" class="img-circle"/>
+  				</object></div>
+                <div class=" col-md-9 col-lg-9 ">
+                <form method="POST">
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr class="text-center">
+                        <td {%ifequal facility_stock.isLow True %} class="alert alert-danger" {%else%} class="alert alert-success" {%endifequal%} colspan="3">
+                         {%ifequal  facility_stock.isLow True %}
+                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                         {%else%}
+                    	<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    	{%endifequal%}                     
+                        
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">Last Date Updated:</td>
+                        <strong><td><strong>{{facility_stock.modified}}</strong></td>
+                      </tr>
+                      <tr>
+                        <td>Current Stock</td>
+                        <td><strong>{{facility_stock.current_level}}&nbsp;units</strong></td>
+                        <td><input type="text" name="current_level" placeholder="Enter a new value"></br><small>leave blank to keep the same</small></td>
+                      </tr>
+                      </tr>
+                        <td>Minimum Level</td>
+                        <td><strong>{{facility_stock.minimum_level}}&nbsp;units</strong></td>
+                        <td><input type="text" name="min_level" placeholder="Enter a new value"></br><small>leave blank to keep the same</small></td>
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+
+                  <a href="/infrastructure/profile/{{facility_stock.facility.id}}" class="btn btn-primary btn-sm ">View Facility</a>
+               	   <button type="submit" class="btn btn-success btn-sm pull-right">Update Levels</button>
+                  </form> 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+  Remove all
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Remove all {{facility_stock.stock_item.name}} from {{facility_stock.facility.name}}</h4>
+      </div>
+      <div class="modal-body">
+      <p>This action will zero all {{facility_stock.stock_item.name}} units allocated to {{facility_stock.facility.name}}. Select OK to continue.</p> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a href="/stock/stock_level/remove/{{facility_stock.id}}/" class="nounderline"><button type="button" class="btn btn-danger">OK</button></a>
+      </div>
+    </div>
+  </div>
+</div>                  
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+{% endblock %}

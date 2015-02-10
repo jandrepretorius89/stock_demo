@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+    <link href="/media/bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+	{% include "navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  	<div class="page-header">
+    	</br><h3>View Stock Levels</br><small>on a per facility basis</small> </h3></br> 
+    </div>
+  </div>
+<div class="container">
+
+{% if message %}
+  <div class="panel panel-success">
+     <div class="panel-heading">
+
+     	<p class="text-center"> <strong>{{ message }}</strong></p>
+  
+      </div>
+  </div>
+{% endif %}
+      <div class="panel panel-default">
+      {% include "message_board.html" %}
+		{% if facility_true %}
+		<a class="nounderline" href="/stock/stock_level/link_stock/{{facility.id}}">
+  		<div class="aler alert-info text-center">
+				<strong>Click here to allocate Stock</strong>
+		</div>
+   		</a>
+		{% endif %}	      
+		    <div class="panel-heading">
+		        <h1 class="panel-title">Facility level overview </h1>
+			</div>
+            <table class="table table-condensed table-hover table_small table_row_border_white">
+            <thead>
+                <tr>
+                    <th>Facility Name</th>
+                    <th>Stock Item Name</th>
+                    <th>Current Stock (units)</th>
+                    <th>Minimum Level (units)</th>
+                    <th>Status</th>
+                    
+                </tr>
+            </thead>
+            {%if stock_levels %}
+            <tbody data-link="row" class="rowlink">
+                {% for stock_item in stock_levels%}
+                <tr {%ifequal stock_item.4 True %} class="alert alert-danger" {%else%} class="alert alert-success" {%endifequal%}>
+                    <td>{{stock_item.0}}</td>
+                    <td class="text-center"><a href="/stock/stock_level/facility/stock_manage/{{stock_item.5}}/{{stock_item.6}}/">{{stock_item.1}}</a></td>
+                    <td class="text-center">{{stock_item.2}}</td>
+                    <td class="text-center">{{stock_item.3}}</td>
+                    {%ifequal stock_item.4 True %}<td class="text-center"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></td>{%else%}
+                    <td class="text-center"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></td>{%endifequal%}
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% else %}
+            <tr class="alert alert-danger text-center" >
+            <td colspan="5">No stock allocated.</td>
+            </tr>
+            {% endif %}
+            </table>
+    </div>
+</div>
+{% endblock %}

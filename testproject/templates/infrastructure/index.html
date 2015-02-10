@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+    <link href="/media/bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+	{% include "navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  	<div class="page-header">
+    	</br><h3>Manage Facilities</br><small>manage an existing facility</small> </h3></br> 
+    </div>
+  </div>
+<div class="container">
+
+{% if message %}
+  <div class="panel panel-success">
+     <div class="panel-heading">
+
+     	<p class="text-center"> <strong>{{ message }}</strong></p>
+  
+      </div>
+  </div>
+{% endif %}
+
+      <div class="panel panel-default">
+{% include "message_board.html" %}      
+		    <div class="panel-heading">
+		        <h1 class="panel-title">Select a Facility to manage</h1>
+		    </div>
+            <table class="table table-condensed table-hover table_small table_row_border_white table-striped">
+            <thead>
+                <tr>
+                    <th>Facility Name</th>
+                    <th>Abbrev.</th>
+                    <th>Type</th>
+                    <th>Postal Address</th>
+                    <th>District</th>
+                    <th>Country</th>
+                    
+                </tr>
+            </thead>
+            <tbody data-link="row" class="rowlink">
+                {% for facility in facilities %}
+                <tr >
+                    <td><a href="/infrastructure/profile/{{facility.id}}/">{{facility.name}}</a></td>
+                    <td>{{facility.abbreviation}}</td>
+                    <td>{{facility.getType}}</td>                    
+                    <td>{{facility.postal_address}}</td>
+                    <td>{{facility.district.name}}</td>
+                    <td>{{facility.district.country.name}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+    <link href="/media/bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+	{% include "navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+
+  	<div class="page-header">
+    	</br><h3>Medical Facility Stock Management Central </br><small>a government initiative</small> </h3></br> 
+    </div>
+  </div>
+<div class="container">
+{% include "message_board.html" %}
+      <div class="panel panel-default">
+			        <div class="panel-body">
+			        <a href="/infrastructure/manage/" class="nounderline">
+			          <div >
+			            <h4>
+			            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;Manage Facilities
+			            </h4>
+			          </div>
+			        </a>          
+                <td class="text-center">
+			        <a href="/stock/manage/" class="nounderline">			        
+			          <div>
+			            <h4>
+			              <span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>&nbsp;&nbsp;Manage Stock
+			            </h4>
+			          </div>
+			          </a>
+			        <a href="/stock/stock_level/manage_levels/" class="nounderline">			        
+			          <div >
+			            <h4>
+			              <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;&nbsp;View Current Stock Levels
+			            </h4>
+			          </div>
+			        </a>
+			        </div>
+
+</div>
+{% endblock %}

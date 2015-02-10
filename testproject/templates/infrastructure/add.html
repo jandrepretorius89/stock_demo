@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% block stylesheet %}
+    <link href="/media/bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+	{% include "navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  	<div class="page-header">
+    	</br><h3>Manage Facilities</br><small>create a new facility</small> </h3></br> 
+    </div>
+  </div>
+<div class="container">
+{% if message %}
+  <div class="panel panel-danger">
+     <div class="panel-heading">
+
+     	<p class="text-center"> <strong>{{ message }}</strong></p>
+  
+      </div>
+  </div>
+{% endif %}
+{% include "message_board.html" %}
+<form action="" method="POST">
+{{form|bootstrap }}
+<div class="form-group pull-right">
+    <div class="col-sm-10">
+    	<button type="submit" class="btn btn-success">Submit</button>
+    </div>
+</div>
+</form>
+{% endblock %}

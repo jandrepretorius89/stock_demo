@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% block stylesheet %}
+    <link href="/media/bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+	{% include "navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  	<div class="page-header">
+    	</br><h3>Link stock to {{facility.name}}</br><small>create new stock levels</small> </h3></br> 
+    </div>
+  </div>
+<div class="container">
+{% include "message_board.html" %}
+{% if save_error_name %}
+  <div class="panel panel-danger">
+     <div class="panel-heading">
+
+     	<p class="text-center"> <strong>{{ save_error_name }}</strong></p>
+  
+      </div>
+  </div>
+{% endif %}
+<form action="" method="POST">
+{{form|bootstrap }}
+<div class="form-group pull-right">
+    <div class="col-sm-10">
+    	<button type="submit" class="btn btn-success">Submit</button>
+    </div>
+</div>
+</form>
+{% endblock %}

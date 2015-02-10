@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+    <link href="/media/bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+	{% include "navigation.html" %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  	<div class="page-header">
+    	</br><h3>Manage Stock</br><small>manage an existing stock item</small> </h3></br> 
+    </div>
+  </div>
+<div class="container">
+{% include "message_board.html" %}
+        <div class="toppad" >
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{stock_item.name}}</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> 
+                  <object data="/media/img/{{stock_item.name}}.jpg" type="image/png" class="img-circle"/>
+  					 <img src="/media/img/def.jpg" class="img-circle"/>
+  				</object></div>
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>Name:</td>
+                        <strong><td><strong>{{stock_item.name}}</strong></td>
+                      </tr>
+                      <tr>
+                        <td>Abbreviation</td>
+                        <td><strong>{{stock_item.abbreviation}}</strong></td>
+                      </tr>
+                        <tr>
+                        <td>Trade Name</td>
+                        <td><strong>{{stock_item.trade_name}}</strong></td>
+                      </tr>
+                       <tr>
+                        <td>Class Name</td>
+                        <td><strong>{{stock_item.class_name}}</strong></td>
+                      </tr>
+                      <tr>
+                        <td>Date Added</td>
+                        <td><strong>{{stock_item.created}}</strong></td>
+                      </tr>
+                      <tr>
+                        <td>Description</td>
+                        <td><p class="text-justify"><strong>{{stock_item.description|safe}}</strong></p></td>
+                      </tr>
+                        <tr>
+                        <td>CAS Number</td>
+                        <td><strong>{{stock_item.cas_number}}</strong></td>
+                      </tr>
+                      <tr>
+                        <td>VA Class</td>
+                        <td><strong>{{stock_item.va_class}}</strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  
+                  <a href="/stock/edit/{{stock_item.id}}/" class="btn btn-primary btn-sm ">Edit Stock Item</a>
+                  <a href="/stock/stock_level/facility_stock/{{stock_item.id}}/" class="btn btn-primary btn-sm pull-right">Facilities that stock this item</a>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+  Remove Stock Item
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Remove a Stock Item</h4>
+      </div>
+      <div class="modal-body">
+      <p>This action will deactivate and remove a stock item from being accessed. 
+      If you would like to continue please select OK. To recover a previously removed stock item please contact an administrator.</p> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a href="/stock/remove/{{stock_item.id}}" class="nounderline"><button type="button" class="btn btn-danger">OK</button></a>
+      </div>
+    </div>
+  </div>
+</div>                  
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+    <link href="/media/bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+	{% include "navigation.html" %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  	<div class="page-header">
+    	</br><h3>Manage Facilities</br><small>manage an existing facility</small> </h3></br> 
+    </div>
+  </div>
+<div class="container">
+		{% include "message_board.html" %}
+        <div class="toppad" >
+   
+   
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{facility.name}}</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> <img src="/media/img/{{facility.getType}}.jpg" class="img-circle"> </div>
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>Name:</td>
+                        <strong><td><strong>{{facility.name}}</strong></td>
+                      </tr>
+                      <tr>
+                        <td>Abbreviation</td>
+                        <td><strong>{{facility.abbreviation}}</strong></td>
+                      </tr>
+                      <tr>
+                        <td>Date Created</td>
+                        <td><strong>{{facility.created}}</strong></td>
+                      </tr>
+                   
+                         <tr>
+                             <tr>
+                        <td>Manager</td>
+                        <td><strong>{{facility.getManager}}</strong></td>
+                      </tr>
+                        <tr>
+                        <td>Contact Number</td>
+                        <td><strong>{{facility.getManagerNumber}}</strong></td>
+                      </tr>
+                      <tr>
+                        <td>Postal Address</td>
+                        <td><strong>{{facility.postal_address}}</strong></td>
+                      </tr>
+                        <td>District</td>
+                        <td><strong>{{facility.district}}</strong></td>
+                      </tr>
+                      </tr>
+                        <td>Country</td>
+                        <td><strong>{{facility.district.country}}</strong></td>
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+                  
+                  <a href="/infrastructure/edit/{{facility.id}}" class="btn btn-primary btn-sm ">Edit Facility</a>
+                  <a href="/stock/stock_level/facility/levels/{{facility.id}}/" class="btn btn-primary btn-sm pull-right">Current Stock Levels</a>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+  Remove Facility
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Remove a Facility</h4>
+      </div>
+      <div class="modal-body">
+      <p>This action will deactivate and remove a facility from being accessed. 
+      If you would like to continue please select OK. To recover a previously removed facility please contact an administrator.</p> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a href="/infrastructure/remove/{{facility.id}}" class="nounderline"><button type="button" class="btn btn-danger">OK</button></a>
+      </div>
+    </div>
+  </div>
+</div>                  
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% if user.status.1 %}<a class="nounderline" href="/stock/under_stocked/">
+  <div class="panel panel-danger text-center">
+     <div class="panel-heading">
+		<strong>Currently {{user.status.1}} {%ifequal user.status.1 1 %} facility {%else%} facilities {%endifequal%} under stocked</strong>
+    </div>
+   </div></a>
+{% endif %}

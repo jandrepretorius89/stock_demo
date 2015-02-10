@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+    <link href="/media/bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+	{% include "navigation.html" %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  	<div class="page-header">
+    	</br><h3>View Stock</br><small>manage an existing stock item</small> </h3></br> 
+    </div>
+  </div>
+<div class="container">
+
+{% if message %}
+  <div class="panel panel-success">
+     <div class="panel-heading">
+
+     	<p class="text-center"> <strong>{{ message }}</strong></p>
+  
+      </div>
+  </div>
+{% endif %}
+
+      <div class="panel panel-default">
+      		{% include "message_board.html" %}
+		    <div class="panel-heading">
+		        <h1 class="panel-title">Select a Stock Item to manage</h1>
+		    </div>
+            <table class="table table-condensed table-hover table_small table_row_border_white table-striped">
+            <thead>
+                <tr>
+                    <th>Stock Item Name</th>
+                    <th>Trade Name</th>
+                    <th>Abbrev.</th>
+                    <th>Class Name</th>
+                    <th>CAS Number</th>
+                    
+                </tr>
+            </thead>
+            <tbody data-link="row" class="rowlink">
+                {% for stock_item in stock%}
+                <tr >
+                    <td><a href="/stock/profile/{{stock_item.id}}/">{{stock_item.name}}</a></td>
+                    <td>{{stock_item.trade_name}}</td>
+                    <td>{{stock_item.abbreviation}}</td>
+                    <td>{{stock_item.class_name}}</td>                    
+                    <td>{{stock_item.cas_number}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+    </div>
+</div>
+{% endblock %}
